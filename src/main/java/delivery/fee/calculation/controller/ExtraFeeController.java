@@ -22,6 +22,10 @@ public class ExtraFeeController {
 
     private final ExtraFeeService extraFeeService;
 
+    /**
+     * This method lists all Extra fee rules regarding weather conditions that are saved in a database.
+     * @return List of ExtraFee classes containing fee rules.
+     */
     @Operation(
             summary = "Get all extra fee REST API",
             description = "Get all extra fee REST API is used to get all the 'Extra fees' from the database"
@@ -32,6 +36,12 @@ public class ExtraFeeController {
     }
 
 
+
+    /**
+     * This method saves new Extra fee rule regarding weather conditions in a database.
+     * @param extraFee new Extra fee rule.
+     * @return String response(Either was successful or an error).
+     */
     @Operation(
             summary = "Add new extra fee REST API",
             description = "Add new extra fee REST API is used to save new 'Extra fee' in a database"
@@ -42,16 +52,29 @@ public class ExtraFeeController {
     }
 
 
+
+    /**
+     * This method updates Extra fee rule regarding weather conditions in a database.
+     * @param updatedExtraFee updated Extra fee rule
+     * @param extraFeeId ID of Extra fee rule you want to update
+     * @return String response(Either was successful or an error).
+     */
     @Operation(
             summary = "Update extra fee REST API",
             description = "Update extra fee REST API is used to update existing 'Extra fee' by ID in a database"
     )
     @PutMapping("extrafee/{id}")
-    public String updateExtraFee(@RequestBody ExtraFee extraFee,
+    public String updateExtraFee(@RequestBody ExtraFee updatedExtraFee,
                                  @PathVariable("id") Long extraFeeId) {
-        return extraFeeService.updateExtraFee(extraFee, extraFeeId);
+        return extraFeeService.updateExtraFee(updatedExtraFee, extraFeeId);
     }
 
+
+    /**
+     * This method deletes Extra fee rule regarding weather conditions from a database.
+     * @param extraFeeId ID of the Extra fee rule to delete
+     * @return String response(Either was successful or an error).
+     */
     @Operation(
             summary = "Delete extra fee REST API",
             description = "Delete extra fee is used to delete existing 'Extra fee' by ID from a database"

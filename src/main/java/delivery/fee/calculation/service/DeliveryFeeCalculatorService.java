@@ -15,7 +15,6 @@ public class DeliveryFeeCalculatorService {
 
     private static final String TALLINN = "TALLINN";
     private static final String TARTU = "TARTU";
-    private static final String PÄRNU = "PÄRNU";
     private static final String CAR = "CAR";
     private static final String SCOOTER = "SCOOTER";
     private static final String BIKE = "BIKE";
@@ -23,6 +22,12 @@ public class DeliveryFeeCalculatorService {
     private final RegionalBaseFeeRepository regionalBaseFeeRepository;
     private final delivery.fee.calculation.repository.ExtraFeeRepository extraFeeRepository;
 
+    /**
+     * This method calculates the delivery fee for food couriers based on regional base fee, vehicle type, and weather
+     * conditions. All those factors are stored inside a database.
+     * @param input Input class containing City(required), Vehicle type(required) and Date time(not required).
+     * @return Output class containing either delivery fee or an error.
+     */
     public Output calculate(Input input) {
         try {
             //===============================INPUT VALIDATION =============================
@@ -57,7 +62,7 @@ public class DeliveryFeeCalculatorService {
 
 
             //=====================EXTRACTING CURRENT WEATHER FROM OUR DATABASE=========================
-            String arg = "Pärnu";
+            String arg = city;
             if (city.equalsIgnoreCase(TALLINN)) {
                 arg = "Tallinn-Harku";
             }

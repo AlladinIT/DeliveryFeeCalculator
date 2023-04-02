@@ -16,6 +16,10 @@ public class ExtraFeeService {
 
     private final ExtraFeeRepository extraFeeRepository;
 
+    /**
+     * This method lists all Extra fee rules regarding weather conditions that are saved in a database.
+     * @return List of ExtraFee classes containing fee rules.
+     */
     public List<ExtraFee> getAllExtraFee() {
         try {
             return extraFeeRepository.findAll();
@@ -25,6 +29,11 @@ public class ExtraFeeService {
         }
     }
 
+    /**
+     * This method saves new Extra fee rule regarding weather conditions in a database.
+     * @param extraFee new Extra fee rule.
+     * @return String response(Either was successful or an error).
+     */
     public String addNewExtraFee(ExtraFee extraFee) {
         try {
             if (!userInputIsValid(extraFee)) {
@@ -58,6 +67,13 @@ public class ExtraFeeService {
         }
     }
 
+
+    /**
+     * This method updates Extra fee rule regarding weather conditions in a database.
+     * @param updatedExtraFee updated Extra fee rule
+     * @param extraFeeId ID of Extra fee rule you want to update
+     * @return String response(Either was successful or an error).
+     */
     public String updateExtraFee(ExtraFee updatedExtraFee, Long extraFeeId) {
         try {
             if (!userInputIsValid(updatedExtraFee)) {
@@ -101,6 +117,12 @@ public class ExtraFeeService {
         }
     }
 
+
+    /**
+     * This method deletes Extra fee rule regarding weather conditions from a database.
+     * @param extraFeeId ID of the Extra fee rule to delete
+     * @return String response(Either was successful or an error).
+     */
     public String deleteExtraFee(Long extraFeeId) {
         try {
             extraFeeRepository.findById(extraFeeId).orElseThrow(

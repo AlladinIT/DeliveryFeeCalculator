@@ -24,6 +24,10 @@ public class CronJobService {
         this.weatherDataRepository = weatherDataRepository;
     }
 
+    /**
+     * This method requests weather data from the weather portal of the
+     * Estonian Environment Agency, parses XML data and imports current weather conditions into database.
+     */
     @Scheduled(cron = "${cron.expression}")
     public void insertWeatherDataIntoDatabase() {
         try {

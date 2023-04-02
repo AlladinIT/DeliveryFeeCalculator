@@ -25,6 +25,12 @@ public class DeliveryFeeCalculatorController {
     private final DeliveryFeeCalculatorService deliveryFeeCalculatorService;
 
 
+    /**
+     * This method calculates the delivery fee for food couriers based on regional base fee, vehicle type, and weather
+     * conditions. All those factors are stored inside a database.
+     * @param input Input class containing City(required), Vehicle type(required) and Date time(not required).
+     * @return Output class containing either delivery fee or an error.
+     */
     @Operation(
             summary = "Calculate delivery fee",
             description = "Calculate delivery fee according to the input parameters"

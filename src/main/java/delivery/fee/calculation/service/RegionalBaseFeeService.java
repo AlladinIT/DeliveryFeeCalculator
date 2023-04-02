@@ -16,6 +16,11 @@ public class RegionalBaseFeeService {
 
     private final RegionalBaseFeeRepository regionalBaseFeeRepository;
 
+
+    /**
+     * This method lists all Regional base fee rules that are saved in a database.
+     * @return List of RegionalBaseFee classes containing fee rules.
+     */
     public List<RegionalBaseFee> getAllRegionalBaseFee() {
         try {
             return regionalBaseFeeRepository.findAll();
@@ -26,6 +31,12 @@ public class RegionalBaseFeeService {
 
     }
 
+
+    /**
+     * This method saves new Regional base fee rule in a database.
+     * @param newRegionalBaseFee new Regional base fee rule.
+     * @return String response(Either was successful or an error).
+     */
     public String addNewRegionalBaseFee(RegionalBaseFee newRegionalBaseFee) {
         try {
             if (!userInputIsValid(newRegionalBaseFee)) {
@@ -44,6 +55,13 @@ public class RegionalBaseFeeService {
         }
     }
 
+
+    /**
+     * This method updates Regional fee rule in a database.
+     * @param updatedRegionalBaseFee updated Regional fee rule
+     * @param regionalBaseFeeId ID of Regional fee rule you want to update
+     * @return String response(Either was successful or an error).
+     */
     public String updateRegionalBaseFee(RegionalBaseFee updatedRegionalBaseFee, Long regionalBaseFeeId) {
         try {
             if (!userInputIsValid(updatedRegionalBaseFee)) {
@@ -74,6 +92,12 @@ public class RegionalBaseFeeService {
         }
     }
 
+
+    /**
+     * This method deletes Regional fee rule from a database.
+     * @param regionalBaseFeeId ID of the Regional fee rule to delete
+     * @return String response(Either was successful or an error).
+     */
     public String deleteRegionalBaseFee(Long regionalBaseFeeId) {
         try {
             regionalBaseFeeRepository.findById(regionalBaseFeeId).orElseThrow(
