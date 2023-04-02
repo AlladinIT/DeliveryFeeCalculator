@@ -58,6 +58,9 @@ example for Json request:
 ```
 
 
+When the project is running REST interface documentation is available on:
+http://localhost:8080/swagger-ui.html
+
 ## Bonus
 CRUD functionaly for business rules, such as "base fees" and "extra fees" are also implemented.
 
