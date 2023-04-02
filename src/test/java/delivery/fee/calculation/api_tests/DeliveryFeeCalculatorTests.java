@@ -324,7 +324,7 @@ public class DeliveryFeeCalculatorTests {
                 .when()
                 .post(FEE_CALCULATOR_API_URL)
                 .then()
-                .body("errorMessage", equalTo("There is no data regarding weather conditions for this period of time"))
+                .body("errorMessage", equalTo("There is no data regarding weather conditions for chosen city and period of time"))
                 .body("deliveryFee", equalTo(null));
     }
 
