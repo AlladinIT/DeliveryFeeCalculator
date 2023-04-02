@@ -33,7 +33,6 @@ public class RegionalBaseFeeController {
     }
 
 
-
     @Operation(
             summary = "Add new Regional base fee REST API",
             description = "Add new Regional base fee REST API is used to save new 'Regional base fee' in a database"

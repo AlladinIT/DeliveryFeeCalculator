@@ -24,12 +24,14 @@ public class Input {
     @NotEmpty(message = "City should not be null or empty")
     private String city;
 
+
     @Schema(
             description = "Vehicle type",
             example = "Scooter"
     )
     @NotEmpty(message = "Vehicle type should not be null or empty")
     private String vehicleType;
+
 
     @Schema(
             description = "Date time",

@@ -3,7 +3,6 @@ package delivery.fee.calculation.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +48,7 @@ public class RegionalBaseFee {
     )
     @Column(name = "carRBF")
     private BigDecimal carRBF;
+
 
     @Schema(
             description = "Regional base fee for a SCOOTER vehicle type",

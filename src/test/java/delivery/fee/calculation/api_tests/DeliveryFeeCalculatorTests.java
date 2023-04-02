@@ -6,11 +6,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 
 public class DeliveryFeeCalculatorTests {
@@ -151,9 +149,75 @@ public class DeliveryFeeCalculatorTests {
                 "vehicleType":"SCOOTER",
                 "dateTime":"2022-08-08 16:16:07"
             }""";//RBF + ATEF + WSEF + WPEF = 2.5 + 0 + 0 + 0 = 2.5 €
-
-
-
+    public static final String nullValue1 = """
+            {
+                "city":null,
+                "vehicleType":"SCOOTER",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String nullValue2 = """
+            {
+                "city":"Tallinn",
+                "vehicleType":null,
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String nullValue3 = """
+            {
+            }""";
+    public static final String invalidCity1 = """
+            {
+                "city":"London",
+                "vehicleType":"SCOOTER",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String invalidCity2 = """
+            {
+                "city":"TTAALLIINN",
+                "vehicleType":"SCOOTER",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String invalidCity3 = """
+            {
+                "city":123456789,
+                "vehicleType":"SCOOTER",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String invalidVehicle1 = """
+            {
+                "city":"Tallinn",
+                "vehicleType":"BUS",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String invalidVehicle2 = """
+            {
+                "city":"Tartu",
+                "vehicleType":"Ship",
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String invalidVehicle3 = """
+            {
+                "city":"PäRNu",
+                "vehicleType":123456789,
+                "dateTime":"2022-08-08 16:16:07"
+            }""";
+    public static final String tooOldDate1 = """
+            {
+                "city":"TaLLinn",
+                "vehicleType":"scooter",
+                "dateTime":"1980-08-08 16:16:07"
+            }""";
+    public static final String tooOldDate2 = """
+            {
+                "city":"TARTU",
+                "vehicleType":"SCOOTER",
+                "dateTime":"2017-08-08 16:16:07"
+            }""";
+    public static final String tooOldDate3 = """
+            {
+                "city":"PäRNu",
+                "vehicleType":"SCOOTER",
+                "dateTime":"2021-12-12 16:16:07"
+            }""";
 
     static Stream<Arguments> provideValidInputAndCalculatedFee() {
         return Stream.of(
@@ -174,94 +238,6 @@ public class DeliveryFeeCalculatorTests {
                 Arguments.of(valid15, 2.5F)
         );
     }
-
-    public static final String nullValue1 = """
-            {
-                "city":null,
-                "vehicleType":"SCOOTER",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-    public static final String nullValue2 = """
-            {
-                "city":"Tallinn",
-                "vehicleType":null,
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-
-
-    public static final String nullValue3 = """
-            {
-            }""";
-
-
-
-
-    public static final String invalidCity1 = """
-            {
-                "city":"London",
-                "vehicleType":"SCOOTER",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-    public static final String invalidCity2 = """
-            {
-                "city":"TTAALLIINN",
-                "vehicleType":"SCOOTER",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-
-
-    public static final String invalidCity3 = """
-            {
-                "city":123456789,
-                "vehicleType":"SCOOTER",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-
-
-    public static final String invalidVehicle1 = """
-            {
-                "city":"Tallinn",
-                "vehicleType":"BUS",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-    public static final String invalidVehicle2 = """
-            {
-                "city":"Tartu",
-                "vehicleType":"Ship",
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-
-
-    public static final String invalidVehicle3 = """
-            {
-                "city":"PäRNu",
-                "vehicleType":123456789,
-                "dateTime":"2022-08-08 16:16:07"
-            }""";
-
-
-    public static final String tooOldDate1 = """
-            {
-                "city":"TaLLinn",
-                "vehicleType":"scooter",
-                "dateTime":"1980-08-08 16:16:07"
-            }""";
-
-    public static final String tooOldDate2 = """
-            {
-                "city":"TARTU",
-                "vehicleType":"SCOOTER",
-                "dateTime":"2017-08-08 16:16:07"
-            }""";
-
-
-    public static final String tooOldDate3 = """
-            {
-                "city":"PäRNu",
-                "vehicleType":"SCOOTER",
-                "dateTime":"2021-12-12 16:16:07"
-            }""";
-
 
     @ParameterizedTest
     @ValueSource(strings = {errorBecauseOfVehicle1, errorBecauseOfVehicle2, errorBecauseOfVehicle3})
