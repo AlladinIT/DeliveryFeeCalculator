@@ -76,7 +76,7 @@ public class DeliveryFeeCalculatorService {
                 if (weather == null) {
                     return new Output(
                             null,
-                            "There is no data regarding weather conditions for this period of time"
+                            "There is no data regarding weather conditions for chosen city and period of time"
                     );
                 }
             } else {
@@ -84,7 +84,7 @@ public class DeliveryFeeCalculatorService {
                 if (weather == null) {
                     return new Output(
                             null,
-                            "The weather data was not yet inserted into database by Cron job"
+                            "The weather data was not yet inserted for this city into database by Cron job"
                     );
                 }
             }
