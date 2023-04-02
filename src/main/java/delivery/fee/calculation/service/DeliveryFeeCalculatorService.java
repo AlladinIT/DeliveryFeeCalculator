@@ -72,7 +72,7 @@ public class DeliveryFeeCalculatorService {
 
             WeatherData weather;
             if (input.getDateTime() != null) {
-                weather = weatherDataRepository.findFirstByNameAndTimestampBeforeOrderByTimestampDesc(arg, input.getDateTime());
+                weather = weatherDataRepository.findFirstByNameIgnoreCaseAndTimestampBeforeOrderByTimestampDesc(arg, input.getDateTime());
                 if (weather == null) {
                     return new Output(
                             null,
@@ -80,7 +80,7 @@ public class DeliveryFeeCalculatorService {
                     );
                 }
             } else {
-                weather = weatherDataRepository.findFirstByNameOrderByTimestampDesc(arg);
+                weather = weatherDataRepository.findFirstByNameIgnoreCaseOrderByTimestampDesc(arg);
                 if (weather == null) {
                     return new Output(
                             null,
